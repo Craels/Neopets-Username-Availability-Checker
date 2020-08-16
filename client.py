@@ -1,19 +1,15 @@
 import requests
 import os
-import sys
 
 s = requests.session()
 PROXY = None
-
-if not os.path.exists('data'):
-    os.mkdir('data')
 
 with open('settings/settings.ini', 'r') as f:
     for data in f:
         if data == "User-Proxy":
             if len(data.split(':', 1)[1]) > 5:
                 PROXY = data.split(':', 1)[1]
-
+                
 if PROXY:
     s.proxies.update({'http': f'http://{PROXY}', 'https': f'https://{PROXY}'})
 
